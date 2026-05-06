@@ -9,7 +9,10 @@ async function bootstrap() {
   app.use(cookieParser());
 
   app.enableCors({
-    origin: 'http://localhost:5173',
+    origin: [
+      'http://localhost:5173',
+      'https://cryptox-frontend-psi.vercel.app',
+    ],
     credentials: true,
   });
 
@@ -23,5 +26,7 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT ?? 3000);
   console.log('🚀 Server running on http://localhost:3000');
+
+  console.log('DB URL:', process.env.DATABASE_URL?.substring(0, 40));
 }
 bootstrap();
